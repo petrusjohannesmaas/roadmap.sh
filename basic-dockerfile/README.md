@@ -5,16 +5,16 @@ This project contains a simple Dockerfile that, when built and run, outputs “H
 ### Getting Started
 These instructions will guide you through building and running the Docker image.
 
-**Prerequisites**
+**Prerequisites:**
 Ensure you have Docker installed on your machine. You can download and install Docker from [here](https://docs.docker.com/get-started/get-docker/):
 
 ### Instructions
 
-Clone the repository (if applicable):
+Clone my `roadmap.sh` repository (if applicable):
 
 ```sh
-git clone https://github.com/TalalNuman/hello-docker.git
-cd hello-docker
+git clone https://github.com/petrusjohannesmaas/roadmap.sh.git
+cd basic-dockerfile
 ```
 
 ### Build the Docker image:
@@ -23,11 +23,9 @@ Run the following command to build the Docker image using the Dockerfile in the 
 
 ```sh
 docker build -t hello-captain .
-Run the Docker container:
 ```
 
-After building the image, you can run and delete the container using:
-
+After building the image, you can run (and delete) the container using:
 ```sh
 docker run --rm hello-captain
 ```
