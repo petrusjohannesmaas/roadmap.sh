@@ -6,7 +6,7 @@ This project contains a simple Dockerfile that, when built and run, outputs “H
 These instructions will guide you through building and running the Docker image.
 
 **Prerequisites**
-Ensure you have Docker installed on your machine. You can download and install Docker from here.
+Ensure you have Docker installed on your machine. You can download and install Docker from [here](https://docs.docker.com/get-started/get-docker/):
 
 ### Instructions
 
