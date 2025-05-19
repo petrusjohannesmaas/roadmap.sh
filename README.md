@@ -1,7 +1,8 @@
 # roadmap.sh
-A public repository to host all my `roadmap.sh` projects
+A public repository to host all my `roadmap.sh` solution projects
 
-Links to original project outlines:
+**Links to original problems:**
 
 * [Basic Dockerfile](https://roadmap.sh/projects/basic-dockerfile)
 * [Dummy Systemd Service](https://roadmap.sh/projects/dummy-systemd-service)
+* [Caching Proxy](https://roadmap.sh/projects/caching-server)
