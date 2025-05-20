@@ -1,22 +1,25 @@
-go
 package main
 
 import (
 	"flag"
 	"fmt"
-	"io"
-	"net/http"
 	"github.com/hashicorp/golang-lru"
+	"io"
+	"log"
+	"net/http"
 )
 
 var (
-	port   int
-	origin string
-	cache  *lru.Cache
+	port       int
+	origin     string
+	clearCache bool
+	cache      *lru.Cache
 )
 
+// Fetch and cache responses
 func fetchAndCache(w http.ResponseWriter, req *http.Request) {
 	url := origin + req.URL.Path
+	log.Printf("Fetching from origin: %s", url)
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -31,41 +34,50 @@ func fetchAndCache(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	cache.Add(req.URL.Path, data) // LRU caching
-
+	cache.Add(req.URL.Path, data) // Add to cache
 	w.Header().Set("X-Cache", "MISS")
 	w.Write(data)
 }
 
+// Handle requests and serve cached responses
 func handler(w http.ResponseWriter, req *http.Request) {
 	if data, ok := cache.Get(req.URL.Path); ok {
-		// Serve cached response
 		w.Header().Set("X-Cache", "HIT")
 		w.Write(data.([]byte))
+		log.Printf("Served from cache: %s", req.URL.Path)
 	} else {
-		// Fetch and cache response
 		fetchAndCache(w, req)
 	}
 }
 
 func main() {
+	// Define flags
 	flag.IntVar(&port, "port", 3000, "Port for proxy server")
 	flag.StringVar(&origin, "origin", "", "Origin server URL")
+	flag.BoolVar(&clearCache, "clear-cache", false, "Clears the cache and exits")
+
+	// Parse flags **only once**
 	flag.Parse()
 
+	// Handle cache clearing request separately
+	if clearCache {
+		cache, _ = lru.New(100) // Initialize cache
+		cache.Purge()           // Clear all entries
+		fmt.Println("Cache cleared!")
+		return // Exit program immediately
+	}
+
+	// Ensure origin is provided
 	if origin == "" {
 		fmt.Println("Usage: caching-proxy --port <number> --origin <url>")
 		return
 	}
 
-	var err error
-	cache, err = lru.New(100) // Limit cache size to 100 entries
-	if err != nil {
-		fmt.Println("Error initializing cache:", err)
-		return
-	}
+	// Initialize cache
+	cache, _ = lru.New(100)
 
+	// Set up HTTP server
 	http.HandleFunc("/", handler)
 	fmt.Printf("Caching proxy server running on port %d, forwarding to %s\n", port, origin)
-	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil)) // Log errors if the server fails
 }

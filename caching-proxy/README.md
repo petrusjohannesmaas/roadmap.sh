@@ -10,7 +10,9 @@ A caching server built with Go. This tool forwards requests to an origin server,
 caching-proxy/
 ├── proxy.go              # Main server implementation
 ├── go.mod                # Go module file
-└── README.md             # Documentation and instructions
+|── README.md             # Documentation and instructions
+└── caching-proxy         # Compiled binary
+
 ```
 
 ---
@@ -28,7 +30,7 @@ caching-proxy/
 ### 1. Clone the Repository
 
 ```sh
-git clone https://github.com/petrusjohannesmaas/caching-proxy.git
+git clone https://github.com/petrusjohannesmaas/roadmap.sh
 cd caching-proxy
 ```
 
@@ -71,8 +73,6 @@ To clear the cache manually, use:
 ```sh
 ./caching-proxy --clear-cache
 ```
-
-> *(Make sure the CLI is updated to support this flag.)*
 
 ---
 
