@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+</head>
+
+<body>
+    <section class="hero is-medium">
+        <div class="hero-body has-text-centered">
+            <h1 class="title">Pomodoro Timer</h1>
+            <div class="columns">
+                <div class="column">
+                    <p id="session-type" class="subtitle">Work Session</p>
+                    <p id="timer" class="has-text-weight-bold is-family-monospace title is-2">25:00</p>
+                    <div class="row">
+                        <button id="start" class="button is-primary is-outlined">Start</button>
+                        <button id="stop" class="button is-warning is-outlined">Pause</button>
+                        <button id="reset" class="button is-danger is-danger">Reset</button>
+                    </div>
+                    <div class="row mt-2">
+                        <span id="session-indicator"></span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>

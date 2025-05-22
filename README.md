@@ -8,3 +8,4 @@ A public repository to host all my `roadmap.sh` solution projects
 * [Caching Proxy](https://roadmap.sh/projects/caching-server)
 * [SSH Remote Server Setup](https://roadmap.sh/projects/ssh-remote-server-setup)
 * [Simple Monitoring Dashboard](https://roadmap.sh/projects/simple-monitoring-dashboard)
+* [Pomodoro Timer](https://roadmap.sh/projects/pomodoro-timer)
