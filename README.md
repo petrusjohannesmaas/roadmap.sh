@@ -6,4 +6,5 @@ A public repository to host all my `roadmap.sh` solution projects
 * [Basic Dockerfile](https://roadmap.sh/projects/basic-dockerfile)
 * [Dummy Systemd Service](https://roadmap.sh/projects/dummy-systemd-service)
 * [Caching Proxy](https://roadmap.sh/projects/caching-server)
-* [ssh Remote Server Setup](https://roadmap.sh/projects/ssh-remote-server-setup)
+* [SSH Remote Server Setup](https://roadmap.sh/projects/ssh-remote-server-setup)
+* [Simple Monitoring Dashboard](https://roadmap.sh/projects/simple-monitoring-dashboard)
