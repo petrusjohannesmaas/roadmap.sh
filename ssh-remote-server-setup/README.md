@@ -1,22 +1,24 @@
 # Linux SSH Server Setup
 
 ## Project Overview
-This project is designed to help users understand and configure SSH access on a remote Linux server. It covers setting up SSH keys, configuring aliases, and implementing basic security measures.
+This project is designed to help me understand and configure SSH access on a remote Linux server which in my case is a virtual machine. It covers setting up SSH keys, configuring aliases, and implementing basic security measures.
 
-## Requirements
-- A remote Linux server or Virtual Machine (AWS, DigitalOcean, etc.)
+## Outcomes
+
 - Two SSH key pairs
 - Ability to SSH into the server using each key
-- Optional: Fail2Ban setup for security
+- **Fail2Ban** setup for security
 
 ### Future improvements:
 - Add more security measures
-- Add email notifications for fail2ban
+- Add email notifications for **fail2ban**
 
 ## Setup Guide
 
+**Note:** We are going to run these commands in the terminal you want to connect from.
+
 ### 1. Register a Linux Server
-Choose a provider such as DigitalOcean or AWS and set up a basic Linux server.
+Set up a virtual machine or choose a provider such as DigitalOcean or AWS and set up a basic Linux server.
 
 ### 2. Generate and Add SSH Keys
 Run the following commands:
@@ -55,25 +57,19 @@ To install and configure **Fail2Ban** for the first time on a **Debian** server,
 
 ---
 
-## ✅ Step 1: Update your package list
+Update your package list:
 
 ```bash
 sudo apt update
 ```
 
----
-
-## ✅ Step 2: Install Fail2Ban
+Install Fail2Ban:
 
 ```bash
 sudo apt install fail2ban -y
 ```
 
-This installs the Fail2Ban service and dependencies.
-
----
-
-## ✅ Step 3: Copy the default config to a local config
+**✅ This installs the Fail2Ban service and dependencies.**
 
 You should never modify the default `jail.conf`. Instead, create a local override:
 
@@ -81,16 +77,10 @@ You should never modify the default `jail.conf`. Instead, create a local overrid
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 ```
 
-Fail2Ban uses `jail.local` to override settings.
-
----
-
-## ✅ Step 4: Edit the jail.local configuration
-
-Open the config file:
+Fail2Ban uses `jail.local` to override settings:
 
 ```bash
-sudo nano /etc/fail2ban/jail.local
+sudo vi /etc/fail2ban/jail.local
 ```
 
 Look for the `[DEFAULT]` section. You can configure:
@@ -117,7 +107,7 @@ mta = sendmail
 action = %(action_mwl)s
 ```
 
-### Common Jail Example (SSH):
+Common Jail Example (SSH):
 
 ```ini
 [sshd]
@@ -127,30 +117,25 @@ logpath = %(sshd_log)s
 backend = systemd
 ```
 
----
-
-## ✅ Step 5: Restart and enable Fail2Ban
+Restart and enable Fail2Ban:
 
 ```bash
 sudo systemctl restart fail2ban
 sudo systemctl enable fail2ban
 ```
 
----
-
-## ✅ Step 6: Check Fail2Ban status
+Check Fail2Ban status:
 
 ```bash
 sudo fail2ban-client status
 ```
 
-To check a specific jail (like sshd):
+To check a specific jail *(like sshd)*:
 
 ```bash
 sudo fail2ban-client status sshd
 ```
 
----
 
 ## 🔒 Additional Tips:
 
@@ -226,7 +211,7 @@ Look for your IP under "Banned IP list".
 sudo tail -f /var/log/fail2ban.log
 ```
 
-You’ll see log entries for:
+**You’ll see log entries for:**
 
 * Detected failed attempts
 * Banning action
@@ -242,7 +227,5 @@ If you locked yourself out or want to reset:
 sudo fail2ban-client set sshd unbanip YOUR.IP.ADDRESS
 ```
 
-## Outcome
-After completing this setup, you will be able to SSH securely into your server using both keys.
-
----
+## Congrats!
+After completing this setup, you will be able to SSH securely into your server using both keys and be able to use **Fail2Ban** to protect your server.

@@ -1,0 +1,2 @@
+[tool.pipx]
+main = "url-shortener"

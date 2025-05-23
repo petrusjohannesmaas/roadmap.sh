@@ -1,0 +1,3 @@
+build/
+url_shortener.egg-info/
+urls.db
