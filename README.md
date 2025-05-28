@@ -12,3 +12,4 @@ A public repository to host all my `roadmap.sh` solution projects
 * [URL Shortening Service](https://roadmap.sh/projects/url-shortening-service)
 * [Blue-Green Deployment](https://roadmap.sh/projects/blue-green-deployment)
 * [Broadcast Server](https://roadmap.sh/projects/broadcast-server)
+* [Log Archive Tool](https://roadmap.sh/projects/log-archive-tool)
