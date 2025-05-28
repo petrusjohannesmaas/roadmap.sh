@@ -1,106 +1,130 @@
-# 📡 WebSocket Broadcast App with Docker (Node.js + ws)
+# 📡 Broadcast Server (CLI WebSocket Chat App)
 
-This guide walks you through:
+A simple CLI-based WebSocket broadcast app built with Node.js. This tool lets you:
 
-* Building a WebSocket broadcast server
-* Connecting CLI clients
-* Containerizing both server and client with **Docker**
-* Running everything using **Docker Compose**
+* Start a WebSocket server
+* Connect multiple interactive clients via terminal
+* Broadcast messages between connected clients in real-time
+* Gracefully handle disconnections with `Ctrl+C`
 
----
+**Prerequisites:** Make sure you have Node.js installed on your machine.
 
-## ✅ Prerequisites
+## ✅ Features
 
-* Docker
-* Docker Compose
+* Terminal-based real-time messaging
+* Nickname support
+* Broadcast to all connected clients
+* Graceful shutdown (`Ctrl+C`)
+* Clean architecture: server and client logic separated
 
----
+## 🧠 How It Works
+
+
+| Command                    | Description                      |
+| -------------------------- | -------------------------------- |
+| `broadcast-server start`   | Starts the WebSocket server      |
+| `broadcast-server connect` | Connects a terminal-based client |
+
+All clients connect to the server and send messages that are broadcast to all other connected clients.
+
 
 ## 📁 Project Structure
 
 ```
 broadcast-app/
 │
-├── server/
-│   ├── server.js
-│   ├── package.json
-│   ├── Dockerfile
-│
-├── client/
-│   ├── client.js
-│   ├── package.json
-│   ├── Dockerfile
-│
-└── docker-compose.yml
+├── broadcast-server.js   # Main CLI entry point
+├── server.js             # Server logic
+├── client.js             # Client logic
+├── package.json
 ```
 
----
+## 🚀 Getting Started
 
-## 🐳 Dockerfiles (same as before)
+### 1. Clone the Repository
 
-No changes needed to the Dockerfiles — Docker and Podman both support them.
-
----
-
-## 🔧 Docker Compose File
-
-**`docker-compose.yml`**
-
-```yaml
-version: "3"
-services:
-  server:
-    build: ./server
-    ports:
-      - "8080:8080"
-
-  client:
-    build: ./client
-    depends_on:
-      - server
-    stdin_open: true
-    tty: true
+```bash
+git clone https://github.com/petrusjohannesmaas/roadmap.sh/
+cd broadcast-server
 ```
 
----
+### 2. Install Dependencies
 
-## 🚀 Step-by-Step Commands
-
-### Build and Start Services
-
-```sh
-docker-compose up --build -d
+```bash
+npm install
 ```
 
-### Run Clients Interactively
+### 3. Link the CLI Command
 
-```sh
-docker-compose run client
+```bash
+chmod +x broadcast-server.js
+sudo npm link
 ```
 
-Run this command multiple times in different terminals to simulate multiple clients.
+This will let you run `broadcast-server` globally from anywhere.
 
----
+## 📦 Usage
 
-## 🛑 Shut Down and Clean Up
+**Start the WebSocket Server:**
 
-```sh
-docker-compose down
+```bash
+broadcast-server start
 ```
 
-Optional:
+* Starts the server on `ws://localhost:8080`
+* Logs client connections and broadcasts
 
-```sh
-docker image prune -a
+**Connect Clients:**
+
+Run these commands in separate terminals to simulate multiple clients.
+
+```bash
+broadcast-server connect
 ```
 
----
+* Prompts for a nickname
+* Lets you send messages interactively
+* Messages are broadcast to all other connected clients
 
-### Future Enhancements:
 
+## 🔧 Future Customization Ideas
+
+* Add command line options (`--port`, `--nickname`)
+* Add secure WebSocket (`wss://`) support
+* Add user authentication
+* Add message history or logging
 * Convert to TypeScript
-* gRPC instead of WebSockets
-* Encryption
-* Authentication
+* Migrate to Deno from Node
+* gRPC or GraphQL API
 
----
+
+## 🧪 Example Session
+
+**Terminal A:**
+
+```bash
+broadcast-server start
+# Output: Broadcast server running at ws://localhost:8080
+```
+
+**Terminal B:**
+
+```bash
+broadcast-server connect
+Enter your nickname: Alice
+Alice> Hello!
+```
+
+**Terminal C:**
+
+```bash
+broadcast-server connect
+Enter your nickname: Bob
+Bob> Hey Alice!
+# Terminal B sees: Received: Bob: Hey Alice!
+```
+
+## 🛑 Graceful Shutdown
+
+* Press `Ctrl+C` in any terminal to disconnect
+* Server will notify all clients and close connections
