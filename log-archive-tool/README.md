@@ -39,15 +39,52 @@ This Bash-based CLI tool archives logs by compressing them into a `.tar.gz` file
 ## Usage
 Run the script with the desired log directory:
 ```bash
-./log-archive.sh /var/log
+sudo ./log-archive.sh /var/log
 ```
 Example output:
 ```
 Logs archived successfully: archives/logs_archive_20240816_100648.tar.gz
 ```
 
-## Advanced Features
-Want to enhance the tool? Here are some ideas:
+**Note:** Depending on the logs, you might need to run the script with `sudo` privileges.
+
+There should be a new archive file in the `archives` directory.
+
+## Questions
+
+**How to change the archive name?**
+* You can change the name and location of the archive by modifying the `ARCHIVE_NAME` variable in the `log-archive.sh` script.
+
+**How to extract the archived logs?**
+
+* To extract or "untar" the archives you've created, you can use the `tar` command. 
+
+```bash
+tar -xzf archives/logs_archive_YYYYMMDD_HHMMSS.tar.gz -C /your/destination/path
+```
+
+**Explanation:**
+
+- `tar` is the command-line tool for handling `.tar` files.
+- `-x` tells `tar` to extract.
+- `-z` indicates that the archive is compressed using gzip (`.tar.gz`).
+- `-f` specifies the archive file you want to extract.
+- `-C` lets you set the destination directory where the extracted files should go.
+
+If you want to extract it into the current directory, simply omit the `-C` flag:
+
+```bash
+tar -xzf archives/logs_archive_YYYYMMDD_HHMMSS.tar.gz
+```
+
+You can also list the contents of an archive before extracting it using:
+
+```bash
+tar -tzf archives/logs_archive_YYYYMMDD_HHMMSS.tar.gz
+```
+
+## Future Enhancements
+
 - Schedule automatic archiving via `cron`.
 - Send email notifications upon completion.
 - Upload archives to remote storage (via `scp` or `rsync`).
