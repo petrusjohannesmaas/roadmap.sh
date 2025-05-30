@@ -4,6 +4,7 @@ A public repository to host all my `roadmap.sh` solution projects
 **Links to original problems:**
 
 * [Basic Dockerfile](https://roadmap.sh/projects/basic-dockerfile)
+* [Basic HTML Site](https://roadmap.sh/projects/basic-html-site)
 * [Dummy Systemd Service](https://roadmap.sh/projects/dummy-systemd-service)
 * [Caching Proxy](https://roadmap.sh/projects/caching-server)
 * [SSH Remote Server Setup](https://roadmap.sh/projects/ssh-remote-server-setup)
