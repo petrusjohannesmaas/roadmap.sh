@@ -1,4 +1,4 @@
-# 📡 Broadcast Server (CLI WebSocket Chat App)
+# 📡 CLI WebSocket Chat App
 
 A simple CLI-based WebSocket broadcast app built with Node.js. This tool lets you:
 
